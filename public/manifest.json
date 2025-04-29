@@ -1,0 +1,17 @@
+{
+    "name": "2A",
+    "short_name": "2A",
+    "start_url": "/",
+    "background_color": "bg-gray-800",
+    "description": "2A Form Yönetimi",
+    "display": "fullscreen",
+    "theme_color": "bg-gray-800",
+    "icons": [
+        {
+            "src": "logo.PNG",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
