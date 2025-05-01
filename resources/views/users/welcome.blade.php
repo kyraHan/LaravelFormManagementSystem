@@ -13,7 +13,7 @@
 
                     <div class="flex justify-between mb-5">
                         <h3 class="text-xl">{{ __("Kullanıcılar") }}</h3>
-                        <a href="{{ route('createuser') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
+                        <a href="{{ route('createuser') }}" class="bg-blue-500 light:text-bg-gray-700 dark:text-white px-4 py-2 rounded">
                             {{ __('Yeni Kullanıcı Oluştur') }}
                         </a>
                     </div>
@@ -51,7 +51,7 @@
                                     <th>{{$user->created_at}}</th>
                                     <th>
                                         <a href="{{ route('edituser',['id' => $user->id]) }}"
-                                           class="bg-blue-500 text-white px-4 py-2 rounded">
+                                           class="bg-blue-500  light:text-bg-gray-700 dark:text-white px-4 py-2 rounded">
                                             {{ __('Düzenle') }}
                                         </a>
                                     </th>

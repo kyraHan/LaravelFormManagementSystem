@@ -14,8 +14,37 @@ class FormController extends Controller
     public function index()
     {
         $forms = Form::all();
+        $users = User::all();
 
-        return view('welcome', compact('forms'));
+        return view('welcome', compact('forms', 'users'));
+    }
+
+    public function indexInQuarriable(Request $request)
+    {
+//        dd($request->all());
+        $users = User::all();
+
+        if ($request->QuarryType === "Result") {
+
+            if ($request->QuarryData === 'on')
+            {
+                $forms = Form::where($request->QuarryType, true)->get();
+                return view('welcome', compact('forms', 'users'));
+            }
+            else if ($request->QuarryData === null) {
+                $forms = Form::where($request->QuarryType, false)->get();
+                return view('welcome', compact('forms', 'users'));
+            }
+        }
+        else if ($request->QuarryType === null || $request->QuarryData === null) {
+            return redirect('/');
+        }
+
+
+        $forms = Form::where($request->QuarryType, 'like', $request->QuarryData . '%')->get();
+//        dd($request->QuarryData);
+
+        return view('welcome', compact('forms', 'users'));
     }
 
     /**
@@ -42,7 +71,7 @@ class FormController extends Controller
             'name' => 'required',
             'email' => '',
             'phoneNumber' => 'required',
-            'password'=>'',
+            'password' => '',
             'status' => '',
             'personel' => '',
             'problem' => '',
@@ -61,25 +90,24 @@ class FormController extends Controller
     {
         $users = User::all();
         $form = Form::find($id);
-        $personel = User::where("name",$form->personel)->first();
-        if ($form["Result"]===1)
-        {
-            $form["Result"]=true;
-        }else{
-            $form["Result"]=false;
+        $personel = User::where("name", $form->personel)->first();
+        if ($form["Result"] === 1) {
+            $form["Result"] = true;
+        } else {
+            $form["Result"] = false;
         }
 
         if (!$form) {
             return redirect()->route('welcome')->with('error', 'Gönderilen parametreyle Uyuşan Bir Form Nesnesi bulunamadı');
         }
 
-        return view('editform', compact('form','users','personel'));
+        return view('editform', compact('form', 'users', 'personel'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request,$id)
+    public function edit(Request $request, $id)
     {
         $form = Form::findOrFail($id);
 
@@ -89,7 +117,7 @@ class FormController extends Controller
 
         $form->update($request->all());
 
-        return redirect()->route('welcome')->with("Success","Form Güncellendi");
+        return redirect()->route('welcome')->with("Success", "Form Güncellendi");
     }
 
     /**

@@ -5,6 +5,7 @@ use \App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[FormController::class, 'index'])->middleware(['auth','verified'])->name('welcome');
+Route::post('/',[FormController::class, 'indexInQuarriable'])->middleware(['auth','verified'])->name('welcomeInQuarriable');
 Route::get('/createform',[FormController::class, 'create'])->middleware(['auth','verified'])->name('createform');
 Route::post('/createform',[FormController::class, 'store'])->middleware(['auth','verified'])->name('createdform');
 Route::get('/formdetail/{id}',[FormController::class, 'show'])->middleware(['auth','verified'])->name('editform');
