@@ -10,7 +10,6 @@
             const selectElement = document.getElementById('QuarryType');
             const inputContainer = document.getElementById('inputContainer');
 
-            // Olay dinleyici ekle
             selectElement.addEventListener('change', function () {
                 const selectedValue = selectElement.value;
 
